@@ -9,14 +9,7 @@ const searchRoutes = require('./routes/searchRoutes');
 
 const app = express();
 
-/**
- * PORT selection:
- * - If `process.env.PORT` is provided (Render/production), we must use it and
- *   not attempt to change it. If it's not provided (local dev), allow a
- *   fallback and incremental retry on EADDRINUSE to avoid crashes when a
- *   previous instance is still bound to the port.
- */
-let listenPort = process.env.PORT ? Number(process.env.PORT) : 5001;
+const PORT = process.env.PORT || 5001;
 
 /* ---------------- CORS CONFIG ---------------- */
 app.use(cors({
@@ -48,33 +41,17 @@ app.use('/api/search', searchRoutes);
 /* ---------------- SERVER START ---------------- */
 const startServer = async () => {
   try {
-    // Connect DB first
-    await connectDB();
+    // Kick off DB connection but do NOT await it — allow server to start
+    // immediately so the app can run in offline/demo mode.
+    connectDB();
 
     const server = http.createServer(app);
 
-    server.listen(listenPort, () => {
-      console.log(`[Server] Running on port ${listenPort}`);
+    server.listen(PORT, () => {
+      console.log(`[Server] Running on port ${PORT}`);
     });
 
     server.on('error', (err) => {
-      if (err && err.code === 'EADDRINUSE') {
-        // If a PORT was explicitly provided by the environment (e.g. Render),
-        // respect it and exit — the platform expects the process to bind to
-        // the provided port.
-        if (process.env.PORT) {
-          console.error(`[Server Error] Port ${listenPort} already in use (process.env.PORT set).`);
-          process.exit(1);
-        }
-
-        // Local dev fallback: try the next port to avoid crashes when a
-        // previously started process still holds the port.
-        console.warn(`[Server] Port ${listenPort} already in use. Trying ${listenPort + 1}...`);
-        listenPort += 1;
-        setTimeout(() => server.listen(listenPort), 250);
-        return;
-      }
-
       console.error('[Server Error]', err);
       process.exit(1);
     });
@@ -88,7 +65,9 @@ const startServer = async () => {
 /* ---------------- GLOBAL ERROR HANDLING ---------------- */
 process.on('unhandledRejection', (err) => {
   console.error('[Unhandled Rejection]', err);
-  process.exit(1);
+  // Do not exit the process on unhandled promise rejections — log them
+  // so the app stays live in demo mode. Consider reporting these to an
+  // error-tracking system in production.
 });
 
 /* ---------------- START APP ---------------- */

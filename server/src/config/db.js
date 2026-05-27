@@ -1,17 +1,25 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
-const connectDB = async () => {
-  try {
-    const connString = process.env.MONGO_URI || 'mongodb://localhost:27017/scholarweb';
-    const conn = await mongoose.connect(connString);
-    console.log(`[Database] Connected successfully to host: ${conn.connection.host}`);
-  } catch (error) {
-    console.error(`[Database Error] Connection failed: ${error.message}`);
-    // Don't exit the process here — allow the server to start even if the database
-    // is temporarily unavailable (useful for deployments without a DB or during retries).
-    // The rest of the application should handle missing DB connections gracefully.
-    return null;
+/**
+ * Attempt to connect to MongoDB in the background if `MONGO_URI` is provided.
+ * If `MONGO_URI` is missing or the connection fails, log a warning and
+ * continue — do NOT throw or exit the process. This makes the server safe
+ * to run in offline/demo mode.
+ */
+const connectDB = () => {
+  const uri = process.env.MONGO_URI;
+  if (!uri) {
+    console.log("[Database Warning] MONGO_URI not provided, running in offline/demo mode");
+    return;
   }
+
+  // Start connection attempt but do not await it — keep startup non-blocking.
+  mongoose
+    .connect(uri)
+    .then(() => console.log("[Database] Connected"))
+    .catch((err) => {
+      console.log("[Database Warning] DB connection failed, running in offline mode:", err.message);
+    });
 };
 
 module.exports = connectDB;
