@@ -7,7 +7,10 @@ const connectDB = async () => {
     console.log(`[Database] Connected successfully to host: ${conn.connection.host}`);
   } catch (error) {
     console.error(`[Database Error] Connection failed: ${error.message}`);
-    process.exit(1); // Exit process with failure
+    // Don't exit the process here — allow the server to start even if the database
+    // is temporarily unavailable (useful for deployments without a DB or during retries).
+    // The rest of the application should handle missing DB connections gracefully.
+    return null;
   }
 };
 
