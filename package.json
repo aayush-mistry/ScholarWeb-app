@@ -1,0 +1,19 @@
+{
+  "name": "scholarweb-monorepo",
+  "version": "1.0.0",
+  "description": "Monorepo workspace configuration for ScholarWeb Educational OS",
+  "private": true,
+  "workspaces": [
+    "client",
+    "server"
+  ],
+  "scripts": {
+    "install:all": "npm install",
+    "dev:server": "npm run dev --workspace=server",
+    "dev:client": "npm run dev --workspace=client",
+    "dev": "concurrently \"npm run dev:server\" \"npm run dev:client\""
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
+}
