@@ -1,28 +1,86 @@
 # ScholarWeb
 
-ScholarWeb is an AI-powered learning platform designed to help students organize, discover, and interact with educational resources through a unified digital workspace.
+ScholarWeb is an AI-powered educational platform designed to help students organize, discover, and optimize their learning journey through intelligent tools, personalized insights, and interactive learning experiences.
 
-## Overview
+## Problem Statement
 
-The platform aims to simplify the learning experience by providing students with tools for resource discovery, academic tracking, and personalized learning assistance. ScholarWeb focuses on creating an engaging and structured environment where students can access educational content efficiently.
+Students often struggle with scattered learning resources, inefficient study planning, lack of personalized guidance, and difficulty tracking academic progress. ScholarWeb aims to address these challenges by providing a centralized platform that supports smarter learning and academic growth.
 
-## Current Progress
+## Vision
+
+To create a unified learning ecosystem where students can discover resources, track progress, visualize knowledge connections, and receive personalized recommendations based on their learning patterns.
+
+---
+
+## Current Development Status
 
 ### Completed
 
 * Project initialization and configuration
-* Frontend application setup
-* Routing and navigation structure
+* Frontend architecture setup
+* Application routing
 * Dashboard layout implementation
-* Core application architecture
+* Sidebar navigation
+* Top navigation bar
+* Core page structure
+* Reusable UI components
+* Dashboard analytics widgets
+* Progress tracking indicators
+* Loading state components
 
-### In Development
+### In Progress
 
-* Academic resource search
-* Student progress tracking
+* Scholar DNA profiling
 * Knowledge graph visualization
-* AI-assisted learning features
-* Content management modules
+* Academic search engine
+* AI-powered recommendations
+* Video learning hub
+* Exam tracking system
+* Backend integration
+
+---
+
+## Planned Features
+
+### Dashboard
+
+* Learning overview
+* Progress analytics
+* Personalized insights
+* Academic statistics
+
+### Scholar DNA
+
+* Learning profile generation
+* Interest identification
+* Personalized recommendations
+* Learning pattern analysis
+
+### Knowledge Graph
+
+* Interactive concept mapping
+* Topic relationships
+* Learning path visualization
+
+### Academic Search
+
+* Intelligent content discovery
+* Resource recommendations
+* AI-assisted search
+
+### Video Hub
+
+* Educational video aggregation
+* Topic-based learning playlists
+* Content recommendations
+
+### Exam Tracker
+
+* Exam preparation monitoring
+* Performance analytics
+* Goal tracking
+
+---
 
 ## Technology Stack
 
@@ -39,12 +97,38 @@ The platform aims to simplify the learning experience by providing students with
 * Express.js
 * MongoDB
 
+### AI & Future Integrations
+
+* Gemini AI
+* Knowledge Graph Engine
+* Recommendation System
+
+---
+
 ## Project Structure
 
 ```text
 client/
+├── src/
+│   ├── components/
+│   │   ├── common/
+│   │   └── graph/
+│   │
+│   ├── context/
+│   ├── layouts/
+│   ├── pages/
+│   │
+│   ├── App.jsx
+│   ├── main.jsx
+│   └── index.css
+│
+├── package.json
+└── vite.config.js
+
 server/
 ```
+
+---
 
 ## Getting Started
 
@@ -60,20 +144,46 @@ npm install
 npm run dev
 ```
 
-## Roadmap
+---
 
-* Build reusable UI components
-* Implement dashboard analytics
-* Develop academic search functionality
-* Integrate AI-powered recommendations
-* Create knowledge graph visualization
-* Add learning progress tracking
-* Optimize user experience
+## Development Roadmap
 
-## Team
+### Phase 1
 
-Developed as part of a hackathon project focused on improving the digital learning experience for students.
+* Project setup
+* Navigation system
+* Dashboard foundation
+
+### Phase 2
+
+* Reusable UI components
+* Dashboard analytics
+* Progress tracking
+
+### Phase 3
+
+* Scholar DNA module
+* State management
+* User profiling
+
+### Phase 4
+
+* Knowledge graph implementation
+* Search functionality
+* AI integration
+
+### Phase 5
+
+* Backend integration
+* Testing
+* Deployment
 
 ---
 
-Project currently under active development.
+## Team
+
+Developed as a hackathon project focused on improving the digital learning experience through intelligent educational technology.
+
+---
+
+**Status:** Active Development 🚀
