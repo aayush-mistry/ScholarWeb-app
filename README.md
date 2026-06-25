@@ -1,4 +1,4 @@
-# ScholarWeb
+# ScholarWeb 
 
 ScholarWeb is an AI-powered educational platform designed to help students discover, organize, and optimize their learning journey through personalized recommendations, intelligent resource discovery, and interactive knowledge visualization.
 
