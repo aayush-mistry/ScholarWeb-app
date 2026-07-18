@@ -6,6 +6,9 @@ const cors = require('cors');
 const connectDB = require('./config/db');
 const dnaRoutes = require('./routes/dnaRoutes');
 const searchRoutes = require('./routes/searchRoutes');
+const videoRoutes = require('./routes/videoRoutes');
+const guardRoutes = require('./routes/guardRoutes');
+const examRoutes = require('./routes/examRoutes');
 
 const app = express();
 
@@ -37,6 +40,9 @@ app.get('/api/health', (req, res) => {
 /* ---------------- ROUTES ---------------- */
 app.use('/api/dna', dnaRoutes);
 app.use('/api/search', searchRoutes);
+app.use('/api/video', videoRoutes);
+app.use('/api/guard', guardRoutes);
+app.use('/api/exam', examRoutes);
 
 /* ---------------- SERVER START ---------------- */
 const startServer = async () => {

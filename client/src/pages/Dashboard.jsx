@@ -1,6 +1,9 @@
 import React from 'react';
 import { useScholarDNA } from '../context/ScholarDNAContext';
 import GlassCard from '../components/common/GlassCard';
+import StatCard from '../components/common/StatCard';
+import ProgressRing from '../components/common/ProgressRing';
+import AIBadge from '../components/common/AIBadge';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { 
@@ -47,6 +50,17 @@ const Dashboard = () => {
   };
 
   const prioritizedNodes = getPrioritizedStudyPlan();
+  const totalTopics = activeDNA?.units?.reduce((acc, unit) => acc + (unit.topics?.length || 0), 0) || 0;
+  const masteredTopics = activeDNA?.units?.reduce((acc, unit) => acc + (unit.topics?.filter((t) => (t.masteryLevel || 0) >= 80).length || 0), 0) || 0;
+  const averageMastery = activeDNA
+    ? Math.round(
+        activeDNA.units.reduce((acc, unit) => acc + unit.topics.reduce((a, t) => a + (t.masteryLevel || 0), 0), 0) /
+          Math.max(totalTopics, 1)
+      )
+    : 0;
+  const examCountdownDays = activeDNA?.targetExamDate
+    ? Math.max(0, Math.ceil((new Date(activeDNA.targetExamDate) - new Date()) / (1000 * 60 * 60 * 24)))
+    : null;
 
   return (
     <div className="space-y-8 select-none">
@@ -64,6 +78,99 @@ const Dashboard = () => {
           <BrainCircuit size={14} className="animate-pulse" />
           <span>Cognitive Engine Synced</span>
         </div>
+      </div>
+
+      <div className="grid gap-6 md:grid-cols-3">
+        <StatCard
+          title="Overall Mastery"
+          value={`${averageMastery}%`}
+          delta={{ value: `${Math.max(0, averageMastery - 72)}%`, positive: averageMastery >= 72 }}
+          icon={TrendingUp}
+          accent="cyan"
+          description="AI-normalized strength score across all active syllabus nodes."
+        />
+
+        <StatCard
+          title="Priority Nodes"
+          value={prioritizedNodes.length}
+          delta={{ value: `${Math.max(0, 5 - prioritizedNodes.length)} nodes`, positive: prioritizedNodes.length <= 3 }}
+          icon={Zap}
+          accent="purple"
+          description="Topics identified for review based on low mastery and high importance."
+        />
+
+        <StatCard
+          title="Exam Readiness"
+          value={`${masteredTopics}/${totalTopics}`}
+          delta={{ value: examCountdownDays ? `${examCountdownDays} days` : 'No date', positive: examCountdownDays ? examCountdownDays <= 21 : false }}
+          icon={Calendar}
+          accent="amber"
+          description="Tracked readiness score against the current exam target window."
+        />
+      </div>
+
+      <div className="grid gap-6 lg:grid-cols-[1.3fr_0.7fr]">
+        <GlassCard glowColor="cyan" hoverScale={false} className="relative overflow-hidden">
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,_rgba(0,240,255,0.18),_transparent_18%),radial-gradient(circle_at_bottom_right,_rgba(157,0,255,0.14),_transparent_22%)] pointer-events-none" />
+          <div className="relative z-10 grid gap-6 lg:grid-cols-[1fr_auto] items-center">
+            <div className="space-y-4 p-6">
+              <div className="flex items-center justify-between gap-4">
+                <div>
+                  <p className="text-[10px] uppercase tracking-[0.32em] text-cyber-gray font-orbitron">Learning Pulse</p>
+                  <h2 className="text-2xl font-extrabold text-white">Neural Progress Monitor</h2>
+                </div>
+                <AIBadge label="Neural Assist" value={`${Math.round(averageMastery)}%`} variant="cyan" />
+              </div>
+
+              <p className="text-sm text-cyber-gray leading-relaxed max-w-prose">
+                Real-time cognitive telemetry shows which knowledge nodes need the most focus. Use the priority queue to cut review time and optimize exam readiness.
+              </p>
+
+              <div className="grid gap-4 sm:grid-cols-3">
+                <div className="rounded-3xl border border-white/10 bg-white/5 p-4">
+                  <p className="text-[10px] uppercase text-cyber-gray tracking-[0.26em] font-orbitron">Mastered</p>
+                  <p className="mt-3 text-2xl font-bold text-cyber-cyan">{masteredTopics}</p>
+                </div>
+                <div className="rounded-3xl border border-white/10 bg-white/5 p-4">
+                  <p className="text-[10px] uppercase text-cyber-gray tracking-[0.26em] font-orbitron">Total nodes</p>
+                  <p className="mt-3 text-2xl font-bold text-cyber-purple">{totalTopics}</p>
+                </div>
+                <div className="rounded-3xl border border-white/10 bg-white/5 p-4">
+                  <p className="text-[10px] uppercase text-cyber-gray tracking-[0.26em] font-orbitron">Sync status</p>
+                  <p className="mt-3 text-2xl font-bold text-cyber-amber">{activeDNA?.syncStatus || 'Active'}</p>
+                </div>
+              </div>
+            </div>
+
+            <div className="py-12 px-6 flex items-center justify-center">
+              <ProgressRing progress={averageMastery} label="Cognitive Sync" accent="cyan" />
+            </div>
+          </div>
+        </GlassCard>
+
+        <GlassCard glowColor="purple" hoverScale={false} className="space-y-6 p-6">
+          <div className="flex items-center justify-between">
+            <div>
+              <p className="text-[10px] uppercase tracking-[0.32em] text-cyber-gray font-orbitron">Priority Queue</p>
+              <h3 className="text-xl font-bold text-white">Next Review Targets</h3>
+            </div>
+            <Sparkles className="h-6 w-6 text-cyber-purple animate-pulse" />
+          </div>
+          <div className="space-y-4">
+            {prioritizedNodes.slice(0, 4).map((node) => (
+              <div key={node.id} className="rounded-3xl border border-white/10 bg-[#080f1f]/80 p-4">
+                <div className="flex items-start justify-between gap-3">
+                  <div>
+                    <p className="text-[10px] uppercase tracking-[0.26em] text-cyber-gray font-orbitron">Unit {node.unitNumber}</p>
+                    <h4 className="text-sm font-semibold text-white mt-1">{node.title}</h4>
+                  </div>
+                  <span className="rounded-full bg-cyber-cyan/10 px-3 py-1 text-[10px] uppercase tracking-[0.24em] font-semibold text-cyber-cyan">{node.masteryLevel}%</span>
+                </div>
+                <p className="mt-3 text-[11px] text-cyber-gray leading-6">{node.importance === 'high' ? 'High impact topic with lower than expected mastery. Schedule an intensive review block.' : 'Continue steady revision for this topic.'}</p>
+              </div>
+            ))}
+          </div>
+        </GlassCard>
       </div>
 
       {activeDNA ? (
