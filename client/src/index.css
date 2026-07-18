@@ -4,6 +4,7 @@
 
 :root {
   color-scheme: dark;
+<<<<<<< HEAD
   --cyber-bg: #07080A;
   --cyber-surface: rgba(15, 17, 24, 0.75);
   --cyber-surface-strong: rgba(20, 22, 31, 0.92);
@@ -20,6 +21,24 @@
   --glass-shadow: 0 12px 50px rgba(0, 0, 0, 0.6);
   --noise: rgba(255, 255, 255, 0.02);
   --radius-xl: 1.5rem;
+=======
+  --cyber-bg: oklch(0.07 0.08 257);
+  --cyber-surface: oklch(0.11 0.06 255 / 0.70);
+  --cyber-surface-strong: oklch(0.13 0.08 252 / 0.92);
+  --cyber-border: rgba(0, 240, 255, 0.18);
+  --cyber-cyan: oklch(0.75 0.22 180);
+  --cyber-purple: oklch(0.70 0.18 280);
+  --cyber-amber: oklch(0.82 0.24 95);
+  --cyber-gray: oklch(0.74 0.03 255 / 0.72);
+  --cyber-white: oklch(0.98 0.01 260);
+  --cyber-cyan-soft: rgba(0, 240, 255, 0.15);
+  --cyber-purple-soft: rgba(157, 0, 255, 0.14);
+  --cyber-amber-soft: rgba(255, 153, 0, 0.15);
+  --glass-border: rgba(255, 255, 255, 0.08);
+  --glass-shadow: 0 18px 80px rgba(0, 0, 0, 0.48);
+  --noise: rgba(255, 255, 255, 0.04);
+  --radius-xl: 1.75rem;
+>>>>>>> e790a5f9057e66b31bd109b0ebf17dd5e5794264
 }
 
 @layer base {
@@ -31,9 +50,15 @@
     margin: 0;
     min-height: 100vh;
     font-family: 'Inter', sans-serif;
+<<<<<<< HEAD
     background: radial-gradient(circle at top left, rgba(163, 230, 53, 0.05), transparent 24%),
                 radial-gradient(circle at bottom right, rgba(0, 240, 255, 0.03), transparent 28%),
                 linear-gradient(180deg, #050608 0%, #07080A 100%);
+=======
+    background: radial-gradient(circle at top left, rgba(0, 240, 255, 0.08), transparent 24%),
+                radial-gradient(circle at bottom right, rgba(157, 0, 255, 0.06), transparent 28%),
+                linear-gradient(180deg, #04050A 0%, #08090C 100%);
+>>>>>>> e790a5f9057e66b31bd109b0ebf17dd5e5794264
     color: var(--cyber-white);
     overflow-x: hidden;
     text-rendering: optimizeLegibility;
@@ -60,12 +85,20 @@
 }
 
 ::-webkit-scrollbar-thumb {
+<<<<<<< HEAD
   background: rgba(163, 230, 53, 0.25);
+=======
+  background: rgba(0, 240, 255, 0.22);
+>>>>>>> e790a5f9057e66b31bd109b0ebf17dd5e5794264
   border-radius: 999px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
+<<<<<<< HEAD
   background: rgba(163, 230, 53, 0.5);
+=======
+  background: rgba(0, 240, 255, 0.45);
+>>>>>>> e790a5f9057e66b31bd109b0ebf17dd5e5794264
 }
 
 @layer components {
@@ -74,17 +107,30 @@
     overflow: hidden;
     border-radius: var(--radius-xl);
     border: 1px solid var(--glass-border);
+<<<<<<< HEAD
     background: rgba(17, 18, 24, 0.88);
     backdrop-filter: blur(24px);
     -webkit-backdrop-filter: blur(24px);
     box-shadow: var(--glass-shadow), 0 0 0 1px rgba(255, 255, 255, 0.01);
     transition: transform 0.28s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.28s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+=======
+    background: rgba(13, 19, 33, 0.62);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    box-shadow: var(--glass-shadow), 0 0 0 1px rgba(255, 255, 255, 0.02);
+    transition: transform 0.28s ease, box-shadow 0.28s ease, border-color 0.28s ease;
+>>>>>>> e790a5f9057e66b31bd109b0ebf17dd5e5794264
   }
 
   .glass-card:hover {
     transform: translateY(-2px);
+<<<<<<< HEAD
     border-color: rgba(163, 230, 53, 0.3);
     box-shadow: 0 20px 60px rgba(0, 0, 0, 0.65), 0 0 30px rgba(163, 230, 53, 0.03);
+=======
+    border-color: rgba(0, 240, 255, 0.25);
+    box-shadow: 0 22px 90px rgba(0, 0, 0, 0.52), 0 0 30px rgba(0, 240, 255, 0.08);
+>>>>>>> e790a5f9057e66b31bd109b0ebf17dd5e5794264
   }
 
   .glass-card::before {

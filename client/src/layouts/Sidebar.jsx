@@ -46,10 +46,17 @@ const Sidebar = ({ activeDNA, resetDNA }) => {
               <button
                 key={item.name}
                 onClick={() => navigate(item.path)}
+<<<<<<< HEAD
                 className={`w-full flex items-center gap-3 rounded-2xl border p-3 text-left transition-all duration-300 ${isActive ? 'bg-gradient-to-r from-cyber-cyan/15 to-cyber-purple/5 border-cyber-cyan/20 text-white shadow-cyan-glow' : 'border-transparent text-cyber-gray hover:bg-white/5 hover:text-white hover:border-white/10'}`}
               >
                 <Icon className={`h-5 w-5 ${isActive ? 'text-cyber-cyan animate-pulse' : 'text-cyber-gray'}`} />
                 {!collapsed && <span className={`text-xs font-semibold tracking-[0.18em] uppercase ${isActive ? 'text-cyber-cyan' : ''}`}>{item.name}</span>}
+=======
+                className={`w-full flex items-center gap-3 rounded-2xl border p-3 text-left transition-all duration-300 ${isActive ? 'bg-cyber-cyan/10 border-cyber-cyan/30 text-cyber-cyan shadow-cyan-glow' : 'border-transparent text-cyber-gray hover:bg-white/5 hover:text-white hover:border-white/10'}`}
+              >
+                <Icon className={`h-5 w-5 ${isActive ? 'text-cyber-cyan' : 'text-cyber-gray'}`} />
+                {!collapsed && <span className="text-xs font-medium tracking-[0.18em] uppercase">{item.name}</span>}
+>>>>>>> e790a5f9057e66b31bd109b0ebf17dd5e5794264
               </button>
             );
           })}

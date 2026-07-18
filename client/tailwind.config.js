@@ -8,6 +8,7 @@ export default {
     extend: {
       colors: {
         cyber: {
+<<<<<<< HEAD
           bg: "#07080A",
           surface: "rgba(15, 17, 24, 0.75)",
           surfaceStrong: "rgba(20, 22, 31, 0.92)",
@@ -24,6 +25,24 @@ export default {
         'purple-glow': '0 0 18px rgba(0, 240, 255, 0.15)',
         'amber-glow': '0 0 18px rgba(251, 146, 60, 0.15)',
         'glass': '0 12px 50px rgba(0, 0, 0, 0.6)',
+=======
+          bg: "#08090C",
+          surface: "rgba(19, 23, 34, 0.62)",
+          surfaceStrong: "rgba(13, 19, 33, 0.88)",
+          border: "rgba(0, 240, 255, 0.18)",
+          cyan: "#00F0FF",
+          purple: "#9D00FF",
+          amber: "#FF9900",
+          gray: "#8E9CAE",
+          white: "#FFFFFF",
+        },
+      },
+      boxShadow: {
+        'cyan-glow': '0 0 18px rgba(0, 240, 255, 0.22)',
+        'purple-glow': '0 0 18px rgba(157, 0, 255, 0.22)',
+        'amber-glow': '0 0 18px rgba(255, 153, 0, 0.22)',
+        'glass': '0 18px 80px rgba(0, 0, 0, 0.48)',
+>>>>>>> e790a5f9057e66b31bd109b0ebf17dd5e5794264
       },
       fontFamily: {
         orbitron: ['Orbitron', 'sans-serif'],

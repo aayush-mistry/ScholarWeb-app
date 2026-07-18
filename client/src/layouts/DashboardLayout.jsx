@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 import React, { useState, useEffect } from 'react';
+=======
+﻿import React, { useState, useEffect } from 'react';
+>>>>>>> e790a5f9057e66b31bd109b0ebf17dd5e5794264
 import { useLocation } from 'react-router-dom';
 import { useScholarDNA } from '../context/ScholarDNAContext';
 import { AnimatePresence, motion } from 'framer-motion';
@@ -34,8 +38,13 @@ const DashboardLayout = ({ children }) => {
   const syncMastery = calculateCognitiveSync();
 
   return (
+<<<<<<< HEAD
     <div className="min-h-screen bg-cyber-bg text-white flex overflow-hidden scanlines">
       <div className="absolute inset-0 cyber-grid pointer-events-none z-0 opacity-[0.03]" />
+=======
+    <div className="min-h-screen bg-[#08090C] text-white flex overflow-hidden scanlines">
+      <div className="absolute inset-0 cyber-grid pointer-events-none z-0 opacity-20" />
+>>>>>>> e790a5f9057e66b31bd109b0ebf17dd5e5794264
 
       <Sidebar activeDNA={activeDNA} resetDNA={resetDNA} />
 
